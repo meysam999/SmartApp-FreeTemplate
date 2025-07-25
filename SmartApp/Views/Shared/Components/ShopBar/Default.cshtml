@@ -1,0 +1,30 @@
+﻿@model ShopBarModel
+
+<div class="shopbar text-sm-center">
+    <div class="shopbar-col-group shopbar-col-group-brand">
+        <div class="shopbar-col shop-logo">
+            @await Component.InvokeAsync("ShopLogo")
+        </div>
+        <div class="shopbar-col shopbar-search d-none d-md-block">
+            <zone name="searchbox" replace-content="true">
+                @await Component.InvokeAsync("SearchBox")
+            </zone>
+        </div>
+        <div class="shopbar-col shopbar-search d-md-none text-right pr-3">
+            <a href="@Url.RouteUrl("Search")" data-toggle="offcanvas" 
+               data-autohide="true" data-placement="end" data-fullscreen="false" data-disablescrolling="true" data-target="#offcanvas-search"><i class="fa fa-magnifying-glass"></i></a>
+        </div>
+    </div>
+
+    <div class="shopbar-col-group shopbar-col-group-tools">
+        <partial name="ShopBar.Tools" model="Model" />
+    </div>
+</div>
+
+<widget target-zone="end" key="offcanvas-search">
+    <aside id="offcanvas-search" class="offcanvas offcanvas-lg offcanvas-shadow offcanvas-end" data-lg="true" data-blocker="true" data-overlay="true">
+        <div class="offcanvas-content mt-4 pl-2 pr-2">
+            @await Component.InvokeAsync("SearchBox")
+        </div>
+    </aside>
+</widget>
